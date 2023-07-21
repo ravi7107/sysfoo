@@ -3,7 +3,6 @@ pipeline {
     environment {
         AWS_ACCESS_KEY_ID = credentials('AKIA6KE3AQUXMNPOB6UN').AWS_ACCESS_KEY_ID
         AWS_SECRET_ACCESS_KEY = credentials('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').AWS_SECRET_ACCESS_KEY
-        EC2_INSTANCE_IP = '44.203.45.104'
     }
     stages {
         stage('Checkout SCM') {
