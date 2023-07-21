@@ -5,7 +5,7 @@ pipeline {
         S3_BUCKET = "mys3-210723"
         S3_OBJECT_KEY = "sysfoo.war"
         EC2_INSTANCE_IP = "i-0e66df3fdf719eba4"
-        EC2_INSTANCE_USER = "ubantu"
+        EC2_INSTANCE_USER = "ravi"
         EC2_INSTANCE_PATH = "/var/lib/jenkins/workspace/Job_2/target/sysfoo.war"
     }
 
