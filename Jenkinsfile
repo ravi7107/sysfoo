@@ -6,7 +6,7 @@ pipeline {
         S3_OBJECT_KEY = "myapp"
         EC2_INSTANCE_IP = "i-0e66df3fdf719eba4"
         EC2_INSTANCE_USER = "ravi"
-        EC2_INSTANCE_PATH = "/var/lib/jenkins/workspace/Job_4/target/"
+        EC2_INSTANCE_PATH = "/var/lib/jenkins/workspace/job_4/target/"
     }
 
     stages {
@@ -24,7 +24,7 @@ pipeline {
         stage('Copy WAR to S3') {
             steps {
                 // Copy the generated WAR file to S3
-                sh "aws s3 cp /var/lib/jenkins/workspace/Job_4/target/sysfoo.war s3://${S3_BUCKET}/${S3_OBJECT_KEY}"
+                sh "aws s3 cp /var/lib/jenkins/workspace/job_4/target/sysfoo.war s3://${S3_BUCKET}/${S3_OBJECT_KEY}"
             }
         }
 
