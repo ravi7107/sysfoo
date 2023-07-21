@@ -3,10 +3,10 @@ pipeline {
 
     environment {
         S3_BUCKET = "mys3-210723"
-        S3_OBJECT_KEY = "sysfoo.war"
+        S3_OBJECT_KEY = "myapp"
         EC2_INSTANCE_IP = "i-0e66df3fdf719eba4"
         EC2_INSTANCE_USER = "ravi"
-        EC2_INSTANCE_PATH = "/var/lib/jenkins/workspace/Job_4/target/sysfoo.war"
+        EC2_INSTANCE_PATH = "/var/lib/jenkins/workspace/Job_4/target/"
     }
 
     stages {
