@@ -1,37 +1,34 @@
 pipeline {
     agent any
-
     environment {
-        S3_BUCKET = "mys3-210723"
-        S3_OBJECT_KEY = "myapp"
-        EC2_INSTANCE_IP = "i-0e66df3fdf719eba4"
-        EC2_INSTANCE_USER = "ravi"
-        EC2_INSTANCE_PATH = "/var/lib/jenkins/workspace/job_4/target/"
+        AWS_ACCESS_KEY_ID = credentials('AKIA6KE3AQUXMNPOB6UN').AWS_ACCESS_KEY_ID
+        AWS_SECRET_ACCESS_KEY = credentials('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').AWS_SECRET_ACCESS_KEY
+        EC2_INSTANCE_IP = '44.203.45.104'
     }
-
     stages {
+        stage('Checkout SCM') {
+            steps {
+                checkout scm
+            }
+        }
         stage('Build') {
             steps {
-                // Checkout your source code from version control (e.g., Git)
-                checkout scm
-
-                // Build your project using Maven
                 sh 'mvn clean'
                 sh 'mvn install'
             }
         }
-
         stage('Copy WAR to S3') {
             steps {
-                // Copy the generated WAR file to S3
-                sh "aws s3 cp /var/lib/jenkins/workspace/job_4/target/sysfoo.war s3://${S3_BUCKET}/${S3_OBJECT_KEY}"
+                withCredentials([string(credentialsId: 'your-aws-credentials-id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'your-aws-credentials-id', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    sh "aws s3 cp /var/lib/jenkins/workspace/job_4/target/sysfoo.war s3://mys3-210723/myapp"
+                }
             }
         }
-
         stage('Copy S3 Object to EC2') {
             steps {
-                // Copy the WAR file from S3 to EC2 instance
-                sh "scp -i /home/ubuntu s3://${S3_BUCKET}/${S3_OBJECT_KEY} ${EC2_INSTANCE_USER}@${EC2_INSTANCE_IP}:${EC2_INSTANCE_PATH}"
+                withCredentials([string(credentialsId: 'your-aws-credentials-id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'your-aws-credentials-id', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    sh "scp -i /path/to/your/private/key /var/lib/jenkins/workspace/job_4/target/sysfoo.war ec2-user@${EC2_INSTANCE_IP}:/home/ec2-user/"
+                }
             }
         }
     }
