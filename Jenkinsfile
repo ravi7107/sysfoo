@@ -3,6 +3,7 @@ pipeline {
     environment {
         AWS_ACCESS_KEY_ID = credentials('AKIA6KE3AQUXMNPOB6UN').AWS_ACCESS_KEY_ID
         AWS_SECRET_ACCESS_KEY = credentials('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').AWS_SECRET_ACCESS_KEY
+        EC2_INSTANCE_ID= 'i-0e66df3fdf719eba4'
     }
     stages {
         stage('Checkout SCM') {
@@ -26,7 +27,7 @@ pipeline {
         stage('Copy S3 Object to EC2') {
             steps {
                 withCredentials([string(credentialsId: 'your-aws-credentials-id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'your-aws-credentials-id', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-                    sh "scp -i /path/to/your/private/key /var/lib/jenkins/workspace/job_4/target/sysfoo.war ec2-user@${EC2_INSTANCE_IP}:/home/ec2-user/"
+                    sh "scp -i /path/to/your/private/key /var/lib/jenkins/workspace/job_4/target/sysfoo.war ec2-user@${EC2_INSTANCE_ID}:/home/ec2-user/"
                 }
             }
         }
