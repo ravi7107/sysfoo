@@ -3,8 +3,8 @@ pipeline {
 
     environment {
         S3_BUCKET = "mys3-210723"
-        S3_OBJECT_KEY = "/myapp"
-        EC2_INSTANCE_IP = "44.211.217.138"
+        S3_OBJECT_KEY = "sysfoo.war"
+        EC2_INSTANCE_IP = "i-0e66df3fdf719eba4"
         EC2_INSTANCE_USER = "ubantu"
         EC2_INSTANCE_PATH = "/var/lib/jenkins/workspace/Job_2/target/sysfoo.war"
     }
@@ -16,7 +16,7 @@ pipeline {
                 checkout scm
 
                 // Build your project using Maven
-                sh 'mvn clean package'
+                sh 'mvn clean'
                 sh 'mvn install'
             }
         }
