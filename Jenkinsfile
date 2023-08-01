@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        AWS_ACCESS_KEY_ID = credentials('AKIA6KE3AQUXE5HQCUMN')
-        AWS_SECRET_ACCESS_KEY = credentials('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')
+        AWS_ACCESS_KEY_ID = credentials('AKIA6KE3AQUXJ6K6ULUH')
+        AWS_SECRET_ACCESS_KEY = credentials('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')
         EC2_INSTANCE_ID= 'i-0ac77d907e3fabef8'
     }
     stages {
@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Copy WAR to S3') {
             steps {
-                sh "aws s3 cp /var/lib/jenkins/workspace/job_4/target/sysfoo.war s3://mys3-210723/myapp"
+                sh "aws s3 cp /var/lib/jenkins/workspace/MyFirstProject/target/sysfoo.war s3://mys3-210723/myapp"
             }
         }
         stage('Copy S3 Object to EC2') {
