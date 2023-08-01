@@ -19,14 +19,14 @@ pipeline {
         }
         stage('Copy WAR to S3') {
             steps {
-                withCredentials([string(credentialsId: 'your-aws-credentials-id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'your-aws-credentials-id', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                withCredentials([string(credentialsId: 'AKIA6KE3AQUXE5HQCUMN', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: '5yFrnIg8TNFcEV46i7Gh1kWfda4BcEKhTnJ30ml2', variable: 'AWS_SECRET_ACCESS_KEY')]) {
                     sh "aws s3 cp /var/lib/jenkins/workspace/job_4/target/sysfoo.war s3://mys3-210723/myapp"
                 }
             }
         }
         stage('Copy S3 Object to EC2') {
             steps {
-                withCredentials([string(credentialsId: 'your-aws-credentials-id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'your-aws-credentials-id', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                withCredentials([string(credentialsId: 'AKIA6KE3AQUXE5HQCUMN', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: '5yFrnIg8TNFcEV46i7Gh1kWfda4BcEKhTnJ30ml2', variable: 'AWS_SECRET_ACCESS_KEY')]) {
                     sh "scp -i /path/to/your/private/key /var/lib/jenkins/workspace/MyFirtsProject/target/sysfoo.war ec2-user@${EC2_INSTANCE_ID}:/home/ec2-user/"
                 }
             }
