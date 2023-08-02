@@ -1,5 +1,5 @@
 pipeline {
-	agent {label "build_server"}
+	agent any
 
 	stages {
 		stage ("This stage will build the package") {
